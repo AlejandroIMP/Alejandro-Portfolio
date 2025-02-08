@@ -1,4 +1,6 @@
 ---
+import CardButton from "./CardComponents/CardButton.astro";
+
 interface Props {
   img: string;
   title: string;
@@ -6,22 +8,25 @@ interface Props {
   tags: string[];
   link: string;
   github: string;
+  slug: unknown;
 }
 
-const { img, title, description, tags, link, github } = Astro.props;
+const { img, title, description, tags, link, github, slug } = Astro.props;
 ---
 
 <article>
-  <figure>
-    <img src={img} alt={title} />
-    <figcaption>{title}</figcaption>
-  </figure>
+  <a href=`./projects/${slug}`>
+    <figure>
+      <img transition:name={`img-${slug}`} src={img} alt={title} />
+      <figcaption transition:name={`title-${slug}`}>{title}</figcaption>
+    </figure>
+  </a>
   <ul>
     {tags.map((tag: string) => <li>{tag}</li>)}
   </ul>
   <p>{description}</p>
   <div>
-    <a href={link}>Live</a>
-    <a href={github}>Github</a>
+    <CardButton link={link}>Live</CardButton>
+    <CardButton link={github}>Github</CardButton>
   </div>
 </article>

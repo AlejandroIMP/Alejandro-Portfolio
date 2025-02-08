@@ -5,7 +5,7 @@ import Layout from "../../layouts/Layout.astro";
 import LanguageSwitcher from "../../components/LanguageSwitcher.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-
+import "../../../styles/global.css";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -47,10 +47,11 @@ export const prerender = true;
       <h2 class="text-xl md:text-5xl font-medium mb-5">
         {t("section.projects.title")}
       </h2>
-      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-5">
         {
-          projects.map((project: {data: {title: string; description: string; tags: string[]; img: string; link: string; github: string}}) => (
+          projects.map((project: {slug: unknown, data: {title: string; description: string; tags: string[]; img: string; link: string; github: string}}) => (
             <ProjectCard
+              slug={project.slug}
               title={project.data.title}
               description={project.data.description}
               tags={project.data.tags}

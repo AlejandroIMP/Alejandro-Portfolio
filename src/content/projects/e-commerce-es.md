@@ -1,11 +1,13 @@
 ---
 title: E-commerce
-description: An ecommerce
-img: e-commerce.png
+description: An ecommerce store
+img: ../e-commerce.png
 tags: ["react", "tailwind"]
 link: https://ola.netlify.ul
 github: https://github.com/alejandroimp/desafio
-lang: en
+lang: es
 ---
 
-ola
+Desarrollo de dashboard administrativo modular (React.js + TypeScript) con CRUD completo para gestión
+de productos, clientes, órdenes y usuarios. Implementación de UI/UX responsive con Material-UI y CSS
+customizado.

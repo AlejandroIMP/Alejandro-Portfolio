@@ -3,47 +3,117 @@ import "../../styles/global.css";
 import Layout from "../../layouts/Layout.astro";
 import LanguageSwitcher from "../../components/LanguageSwitcher.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getCollection } from "astro:content";
+import ProjectCard from "../../components/ProjectCard.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const projects = await getCollection("projects", (entry: {
+  data: { lang: string }, // Tipo explícito
+  slug: string
+}) => {
+  return entry.data.lang === lang; // 'en' o 'es'
+});
+
+export const prerender = true;
 ---
 
 <Layout title="Alejandro Sunuc">
-  <header
-    class="h-lvh flex flex-col justify-center items-center animate-fade-in-down"
-    id="hero"
-  >
+  <header class="h-lvh flex flex-col justify-center items-center">
     <nav
-      class="flex justify-between fixed top-0 left-0 right-0 z-10 p-4 font-light bg-amber-50"
+      class="flex justify-between fixed top-0 left-0 right-0 z-10 px-6 py-4 font-light text-lg bg-amber-50"
     >
       <p>{t("nav.title")}</p>
       <LanguageSwitcher />
     </nav>
-    <p class="text-2xl md:text-6xl font-semibold text-gradient">
-      {t("header.presentation")}
-      <span class="gradient">Alejandro Sunuc</span>
-    </p>
+    <section id="hero" class="animate-fade-in">
+      <p class="text-2xl md:text-6xl font-semibold text-gradient">
+        {t("header.presentation")}
+        <span class="gradient">Alejandro Sunuc</span>
+      </p>
+    </section>
   </header>
-  <main class="p-4 text-center">
-    <section class="gap-5" id="about-me">
-      <h2 class="text-3xl font-semibold mb-5">{t("section.aboutme.title")}</h2>
+  <main class="px-4 md:px-32 lg:px-72 text-center">
+    <section class="gap-5 item__card fade-in" id="about-me">
+      <h2 class="text-xl md:text-5xl font-medium mb-5">
+        {t("section.aboutme.title")}
+      </h2>
       <p>
         {t("section.aboutme.description")}
       </p>
     </section>
-    <section id="projects">
-      <h2>{t("section.projects.title")}</h2>
+    <section class="gap-5 item__card fade-in" id="projects">
+      <h2 class="text-xl md:text-5xl font-medium mb-5">
+        {t("section.projects.title")}
+      </h2>
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {
+          projects.map((project: {slug: unknown, data: {title: string; description: string; tags: string[]; img: string; link: string; github: string}}) => (
+            <ProjectCard
+              slug={project.slug}
+              title={project.data.title}
+              description={project.data.description}
+              tags={project.data.tags}
+              img={project.data.img}
+              link={`${project.data.link}`}
+              github={project.data.github}
+            />
+          ))
+        }
+
+      </section>
     </section>
-    <section id="tech">
-      <h2>{t("section.technologies.title")}</h2>
+    <section class="gap-5 item__card fade-in" id="tech">
+      <h2 class="text-xl md:text-5xl font-medium mb-5">
+        {t("section.technologies.title")}
+      </h2>
     </section>
-    <section id="contact">
-      <h2>{t("section.contact.title")}</h2>
+    <section
+      class="item__card slide-in flex flex-col justify-center items-center gap-10"
+      id="contact"
+    >
+      <h2 class="text-xl md:text-5xl font-medium mb-5">
+        {t("section.contact.title")}
+      </h2>
+      <form
+        action="onSubmit"
+        class="flex flex-col gap-10 text-lg mt-5 border border-gray-300 p-5 rounded-lg  w-full"
+      >
+        <fieldset class="flex items-center gap-2">
+          <label class="w-24" for="name">{t("section.contact.form.name")}:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="font-light w-full p-3 border border-gray-300 rounded-lg"
+          />
+        </fieldset>
+        <fieldset class="flex items-center gap-2">
+          <label class="w-24" for="email">{t("section.contact.form.email")}:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="font-light w-full p-3 border border-gray-300 rounded-lg"
+          />
+        </fieldset>
+        <fieldset class="flex items-center gap-2">
+          <label class="w-24" for="message">{t("section.contact.form.message")}:</label>
+          <textarea id="message" name="message" class="font-light w-full p-3 border border-gray-300 rounded-lg"
+          ></textarea>
+        </fieldset>
+        <button type="submit">{t("section.contact.form.submit")}</button>
+      </form>
     </section>
   </main>
-  <footer></footer>
+  <footer>
+    <p class="text-center text-sm font-light">
+      
+    </p>
+  </footer>
   <style>
-    .text-gradient {
+    .text-gradient {21
       color: #171212;
     }
 

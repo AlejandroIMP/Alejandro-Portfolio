@@ -18,7 +18,9 @@ export const ui = {
     'section.contact.form.name': 'Name',
     'section.contact.form.email': 'Email',
     'section.contact.form.message': 'Message',
-    'section.contact.form.submit': 'Submit'
+    'section.contact.form.submit': 'Submit',
+    'card.project.btn.link': 'View project',
+    'card.project.btn.code': 'View code',
   },
   es: {
     'nav.title': 'Desarrollador Web',
@@ -32,7 +34,9 @@ export const ui = {
     'section.contact.form.name': 'Nombre',
     'section.contact.form.email': 'Correo',
     'section.contact.form.message': 'Mensaje',
-    'section.contact.form.submit': 'Enviar'
+    'section.contact.form.submit': 'Enviar',
+    'card.project.btn.link': 'Ver proyecto',
+    'card.project.btn.code': 'Ver código',
   }
 } as const;
 
