@@ -5,7 +5,7 @@ import Layout from "../../layouts/Layout.astro";
 import LanguageSwitcher from "../../components/LanguageSwitcher.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-import "../../../styles/global.css";
+import '../../styles/global.css';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
