@@ -23,6 +23,9 @@ const lang = getLangFromUrl(Astro.url);
   </head>
   <body>
     <slot />
+    <footer>
+      <p>{new Date().getFullYear()} © Alejandro Sunuc</p>
+    </footer>
   </body>
 </html>
 
@@ -34,5 +37,14 @@ const lang = getLangFromUrl(Astro.url);
     height: 100%;
     background: rgb(255, 253, 246);
     color: #171212;
+  }
+
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background: #171212;
+    color: white;
   }
 </style>

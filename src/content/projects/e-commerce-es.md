@@ -1,6 +1,6 @@
 ---
 title: E-commerce
-description: An ecommerce store
+description: Tienda en linea
 img: ../e-commerce.png
 tags: ["react", "tailwind"]
 link: https://ola.netlify.ul
