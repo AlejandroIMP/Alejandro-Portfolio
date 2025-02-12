@@ -14,18 +14,30 @@ interface Props {
 const { img, title, description, tags, link, github, slug } = Astro.props;
 ---
 
-<article>
+<article
+  class="rounded-lg shadow-xl p-4 flex flex-col items-center hover:shadow-2xl hover:drop-shadow-xl hover:bg-amber-50 transition-all duration-300 ease-in-out"
+>
   <a href=`./projects/${slug}`>
-    <figure>
-      <img transition:name={`img-${slug}`} src={img} alt={title} />
-      <figcaption transition:name={`title-${slug}`}>{title}</figcaption>
+    <figure class="w-full">
+      <img
+        class="rounded-lg shadow-xl"
+        transition:name={`img-${slug}`}
+        src={img}
+        alt={title}
+      />
+      <figcaption
+        class="font-semibold text-2xl text-center mt-3"
+        transition:name={`title-${slug}`}
+      >
+        {title}
+      </figcaption>
     </figure>
   </a>
-  <ul>
+  <ul class="flex gap-2 font-extralight text-sm mb-2 p-0">
     {tags.map((tag: string) => <li>{tag}</li>)}
   </ul>
-  <p>{description}</p>
-  <div>
+  <p class="font-normal text-sm mb-5">{description}</p>
+  <div class="flex gap-2">
     <CardButton link={link}>Live</CardButton>
     <CardButton link={github}>Github</CardButton>
   </div>
