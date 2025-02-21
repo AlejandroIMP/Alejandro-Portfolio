@@ -1,13 +1,11 @@
 ---
-title: E-commerce
+title: Shopi-Commerce
 description: Tienda en linea
-img: ../e-commerce.png
-tags: ["react", "tailwind"]
-link: https://ola.netlify.ul
-github: https://github.com/alejandroimp/desafio
+img: ../shopi-commerce.png
+tags: ["react", "tailwind", "css", "javascript"]
+link: https://shopi-page.vercel.app/
+github: https://github.com/AlejandroIMP/shopi-page
 lang: es
 ---
 
-Desarrollo de dashboard administrativo modular (React.js + TypeScript) con CRUD completo para gestión
-de productos, clientes, órdenes y usuarios. Implementación de UI/UX responsive con Material-UI y CSS
-customizado.
+Desarrollo de UI para una tienda online, la cual cuenta con un carrito de compras interactivo y un buscador capaz de filtrar los elementos según su categoría y su nombre, esta desarrollado con react y consumiendo la API fakestore de platzi.
