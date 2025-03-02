@@ -1,5 +1,5 @@
 ---
-title: Shopi-Commerce
+title: My E-Commerce
 description: E-Commerce
 img: ../shopi-commerce.png
 tags: ["react", "tailwind", "css", "javascript"]

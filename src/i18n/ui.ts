@@ -7,7 +7,7 @@ export const defaultLang = 'en'
 
 export const ui = {
   en: {
-    'nav.title': 'Web Developer',
+    'header.description': 'Web Developer',
     'header.presentation': `Hi, I'm `,
     'section.aboutme.title': 'About me',
     'section.aboutme.description': `Initiative-taking Frontend Developer with solid knowledge in frameworks like React for Frontend and ExpressJS, NestJs for Back-End work. Looking for an opportunity to apply my technical skills and passion for web development in a professional environment. With a strong self-learning ability and experience gained through personal and academic projects, I look forward to contributing to a team's success and professional growth in the web development field`,
@@ -21,9 +21,10 @@ export const ui = {
     'section.contact.form.submit': 'Submit',
     'card.project.btn.link': 'View project',
     'card.project.btn.code': 'View code',
+    'route.resume': 'resumeDavidAlejandroSianSunuc.pdf',
   },
   es: {
-    'nav.title': 'Desarrollador Web',
+    'header.description': 'Desarrollador Web',
     'header.presentation': 'Hola, soy ',
     'section.aboutme.title': 'Acerca de mi',
     'section.aboutme.description': `Desarrollador autodidacta con sólidos conocimientos en framework de Front-End, manejo de API REST, experiencia la UI y UX, con conocimiento de la construcción del Back-End. Buscando una oportunidad para aplicar mis habilidades técnicas y mi pasión por el desarrollo web en un entorno profesional. Con una gran capacidad de autoaprendizaje y experiencia adquirida a través de proyectos personales y académicos, espero contribuir al éxito y crecimiento profesional de un equipo en el campo del desarrollo web. `,
@@ -37,6 +38,7 @@ export const ui = {
     'section.contact.form.submit': 'Enviar',
     'card.project.btn.link': 'Ver proyecto',
     'card.project.btn.code': 'Ver código',
+    'route.resume': 'cvDavidSianSunuc.pdf',
   }
 } as const;
 

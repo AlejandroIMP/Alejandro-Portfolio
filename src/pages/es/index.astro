@@ -6,15 +6,16 @@ import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { getCollection } from "astro:content";
 import ProjectCard from "../../components/ProjectCard.astro";
 import Carrusel from "../../components/Carrusel.astro";
+import SocialIcons from "../../components/SocialIcons.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const projects = await getCollection("projects", (entry: {
-  data: { lang: string }, // Tipo explícito
+  data: { lang: string }, 
   slug: string
 }) => {
-  return entry.data.lang === lang; // 'en' o 'es'
+  return entry.data.lang === lang; 
 });
 
 export const prerender = true;
@@ -25,7 +26,6 @@ export const prerender = true;
     <nav
       class="flex justify-between fixed top-0 left-0 right-0 z-10 px-6 py-4 font-light text-lg bg-amber-50"
     >
-      <p>{t("nav.title")}</p>
       <LanguageSwitcher />
     </nav>
     <section id="hero" class="animate-fade-in">
@@ -34,6 +34,8 @@ export const prerender = true;
         <span class="gradient">Alejandro Sunuc</span>
       </p>
     </section>
+    <p class="font-light text-lg">{t("header.description")}</p>
+    <SocialIcons />
   </header>
   <main class="px-4 md:px-32 lg:px-72 text-center flex flex-col gap-20">
     <section class="gap-5 item__card fade-in " id="about-me">
