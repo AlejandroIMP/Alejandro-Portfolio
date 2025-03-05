@@ -6,11 +6,21 @@ const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 ---
 
-<ul class="flex gap-2">
+<ul class="flex gap-3 items-center">
   {
-    Object.entries(languages).map(([lang, label]) => (
+    Object.entries(languages).map(([langCode, label]) => (
       <li>
-        <a href={translatePath("/", lang)}>{label}</a>
+        <a
+          href={translatePath("/", langCode)}
+          class={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors duration-200 
+                 ${
+                   langCode === lang
+                     ? "bg-amber-800 text-white shadow-sm"
+                     : "text-gray-700 hover:bg-amber-100 hover:text-amber-800"
+                 }`}
+        >
+          {label}
+        </a>
       </li>
     ))
   }

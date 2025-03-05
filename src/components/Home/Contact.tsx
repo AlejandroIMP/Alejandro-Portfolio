@@ -1,4 +1,3 @@
-
 import { useTranslations } from "../../i18n/utils";
 import { useState } from "react";
 import type { FormEvent } from "react";
@@ -10,20 +9,34 @@ interface Props {
 export default function Contact({lang}: Props) {
   const t = useTranslations(lang);
   const [responseMessage, setResponseMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  async function handleSumbit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    const formData = new FormData(event.target as HTMLFormElement);
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      body: formData,
-    });
-    const data = await response.json();
-    if (data.success) {
-      setResponseMessage(t("section.contact.form.success"));
-    } else {
+    setIsLoading(true);
+    
+    try {
+      const formData = new FormData(event.target as HTMLFormElement);
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: formData,
+      });
+      
+      const data: {
+        success: boolean;
+        message: string;
+      } = await response.json();
+      
+      if (data.success) {
+        setResponseMessage(t("section.contact.form.success"));
+        (event.target as HTMLFormElement).reset(); 
+      } else {
+        setResponseMessage(t("section.contact.form.error"));
+      }
+    } catch (error) {
       setResponseMessage(t("section.contact.form.error"));
+    } finally {
+      setIsLoading(false); 
     }
   }
 
@@ -38,7 +51,7 @@ export default function Contact({lang}: Props) {
         {t("section.contact.title")}
       </h2>
       <form
-        onSubmit={handleSumbit}
+        onSubmit={handleSubmit}
         id="contactForm"
         className="flex flex-col gap-10 text-lg mt-5 border border-gray-300 p-5 rounded-lg w-full"
       >
@@ -73,28 +86,32 @@ export default function Contact({lang}: Props) {
             className="font-light w-full p-3 border border-gray-300 rounded-lg"
           ></textarea>
         </fieldset>
-        <button className="border">
-          <span id="btnText">{t("section.contact.form.submit")}</span>
-
-          <svg
-            id="loader"
-            className="hidden animate-spin h-5 w-5 text-white"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="4"></circle>
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-          </svg>
+        <button className="p-3 border rounded-2xl hover:text-white hover:bg-amber-900 ease-in-out transition-colors duration-300">
+          {
+            isLoading ? (
+              <svg
+                className="animate-spin h-5 w-5 text-blue-700"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              </svg>
+            ) : (
+              <span>{t("section.contact.form.submit")}</span>
+            )
+          }
+        
         </button>
       </form>
       {responseMessage && (
