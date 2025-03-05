@@ -1,115 +1,28 @@
 ---
 import "../../styles/global.css";
 import Layout from "../../layouts/Layout.astro";
-import LanguageSwitcher from "../../components/LanguageSwitcher.astro";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-import { getCollection } from "astro:content";
-import ProjectCard from "../../components/ProjectCard.astro";
-import Carrusel from "../../components/Carrusel.astro";
-import SocialIcons from "../../components/SocialIcons.astro";
+import HeaderHome from "../../components/Home/HeaderHome.astro";
+import AboutMe from "../../components/Home/AboutMe.astro";
+import Projects from "../../components/Home/Projects.astro";
+import Technologies from "../../components/Home/Technologies.astro";
+import Contact from "../../components/Home/Contact";
+import { getLangFromUrl } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
-const projects = await getCollection("projects", (entry: {
-  data: { lang: string }, // Tipo explícito
-  slug: string
-}) => {
-  return entry.data.lang === lang; // 'en' o 'es'
-});
 
 export const prerender = true;
 ---
 
 <Layout title="Alejandro Sunuc">
-  <header class="h-lvh flex flex-col justify-center items-center">
-    <nav
-      class="flex justify-between fixed top-0 left-0 right-0 z-10 px-6 py-4 font-light text-lg bg-amber-50"
-    >
-      <LanguageSwitcher />
-    </nav>
-    <section id="hero" class="animate-fade-in">
-      <p class="font-semibold text-gradient olivetti">
-        {t("header.presentation")}
-        <span class="gradient">Alejandro Sunuc</span>
-      </p>
-    </section>
-    <p class="font-light text-lg">{t("header.description")}</p>
-    <SocialIcons />
-  </header>
+  <HeaderHome />
   <main class="px-4 md:px-32 lg:px-72 text-center flex flex-col gap-20">
-    <section class="gap-5 item__card fade-in " id="about-me">
-      <h2 class="text-xl md:text-5xl font-medium mb-10 hover-underline-animation left">
-        {t("section.aboutme.title")}
-      </h2>
-      <p>
-        {t("section.aboutme.description")}
-      </p>
-    </section>
-    <section class="gap-5 item__card fade-in" id="projects">
-      <h2 class="text-xl md:text-5xl font-medium mb-10 hover-underline-animation left">
-        {t("section.projects.title")}
-      </h2>
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {
-          projects.map((project: {slug: unknown, data: {title: string; description: string; tags: string[]; img: string; link: string; github: string}}) => (
-            <ProjectCard
-              slug={project.slug}
-              title={project.data.title}
-              description={project.data.description}
-              tags={project.data.tags}
-              img={project.data.img}
-              link={`${project.data.link}`}
-              github={project.data.github}
-            />
-          ))
-        }
-
-      </section>
-    </section>
-    <section class="item__card fade-in" id="tech">
-      <h2 class="text-xl md:text-5xl font-medium mb-10 hover-underline-animation left">
-        {t("section.technologies.title")}
-      </h2>
-      <Carrusel />
-    </section>
-    <section
-      class="item__card slide-in flex flex-col justify-center items-center gap-10 mb-10"
-      id="contact"
-    >
-      <h2 class="text-xl md:text-5xl font-medium mb-10 hover-underline-animation left">
-        {t("section.contact.title")}
-      </h2>
-      <form
-        action="onSubmit"
-        class="flex flex-col gap-10 text-lg mt-5 border border-gray-300 p-5 rounded-lg  w-full"
-      >
-        <fieldset class="flex items-center gap-2">
-          <label class="w-24" for="name">{t("section.contact.form.name")}:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="font-light w-full p-3 border border-gray-300 rounded-lg"
-          />
-        </fieldset>
-        <fieldset class="flex items-center gap-2">
-          <label class="w-24" for="email">{t("section.contact.form.email")}:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="font-light w-full p-3 border border-gray-300 rounded-lg"
-          />
-        </fieldset>
-        <fieldset class="flex items-center gap-2">
-          <label class="w-24" for="message">{t("section.contact.form.message")}:</label>
-          <textarea id="message" name="message" class="font-light w-full p-3 border border-gray-300 rounded-lg"
-          ></textarea>
-        </fieldset>
-        <button type="submit">{t("section.contact.form.submit")}</button>
-      </form>
-    </section>
+  <AboutMe />
+  <Projects />
+  <Technologies />
+  <Contact 
+    client:load
+    lang={lang}
+  />
   </main>
   <style>
     .text-gradient {21

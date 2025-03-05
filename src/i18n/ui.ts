@@ -22,6 +22,9 @@ export const ui = {
     'card.project.btn.link': 'View project',
     'card.project.btn.code': 'View code',
     'route.resume': 'resumeDavidAlejandroSianSunuc.pdf',
+    'section.contact.form.sending': 'Sending...',
+    'section.contact.form.success': 'Message sent',
+    'section.contact.form.error': 'Error sending form',
   },
   es: {
     'header.description': 'Desarrollador Web',
@@ -39,6 +42,9 @@ export const ui = {
     'card.project.btn.link': 'Ver proyecto',
     'card.project.btn.code': 'Ver código',
     'route.resume': 'cvDavidSianSunuc.pdf',
+    'section.contact.form.sending': 'Enviando...',
+    'section.contact.form.success': 'Mensaje enviado',
+    'section.contact.form.error': 'Error al enviar el formulario',
   }
 } as const;
 
