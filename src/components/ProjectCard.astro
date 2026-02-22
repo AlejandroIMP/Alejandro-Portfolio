@@ -36,10 +36,10 @@ const { img, title, description, tags, link, github, slug } = Astro.props;
       </figcaption>
     </figure>
   </a>
-  <ul class="flex gap-2 font-extralight text-sm mb-2 p-0">
+  <ul class="flex gap-2 font-normal text-sm mb-2 p-0">
     {tags.map((tag: string) => <li>{tag}</li>)}
   </ul>
-  <p class="font-normal text-sm mb-5">{description}</p>
+  <p class="font-normal text-[clamp(1rem,2.5vw,1.125rem)]  mb-5">{description}</p>
   <div class="flex gap-2">
     <CardButton link={link}>{t("card.project.btn.link")}</CardButton>
     <CardButton link={github}>{t("card.project.btn.code")}</CardButton>

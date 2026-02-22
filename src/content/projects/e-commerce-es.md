@@ -1,7 +1,7 @@
 ---
 title: Shopi-Commerce
 description: Tienda en linea
-img: ../shopi-commerce.png
+img: ../shopi-commerce.webp
 tags: ["react", "tailwind", "css", "javascript"]
 link: https://shopi-page.vercel.app/
 github: https://github.com/AlejandroIMP/shopi-page
